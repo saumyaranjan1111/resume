@@ -53,7 +53,12 @@
 % For underline
 \usepackage[normalem]{ulem}
 
-\setmainfont{ Arial }  % Set it to whatever you like
+% Use the Lato font, loaded from the local 'fonts' directory
+\setmainfont{Lato-Regular.ttf}[
+  Path           = ./fonts/,
+  BoldFont       = Lato-Bold.ttf,
+  ItalicFont     = Lato-Italic.ttf
+]
 
 \begin{document}
 
