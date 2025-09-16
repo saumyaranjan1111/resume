@@ -13,11 +13,17 @@ jobs:
       - name: Set up Git repository
         uses: actions/checkout@v4
 
+      # New step to install the Arial font
+      - name: Install Microsoft Fonts
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ttf-mscorefonts-installer
+          sudo fc-cache -f -v
+
       - name: Compile LaTeX document
         uses: xu-cheng/latex-action@v3
         with:
           root_file: resume.tex
-          # Explicitly tell the action to use the xelatex compiler
           compiler: xelatex
 
       - name: Upload PDF artifact
