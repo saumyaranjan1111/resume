@@ -21,14 +21,13 @@ jobs:
         uses: actions/checkout@v4
 
       # Step 2: This is the main action that compiles the LaTeX file.
-      # It uses a pre-built action from the community.
       - name: Compile LaTeX document
         uses: xu-cheng/latex-action@v3
         with:
           # The main .tex file to be compiled. Change this if your file has a different name.
           root_file: resume.tex
-          # The name of the output PDF file.
-          output_file: resume.pdf
+          # The 'output_file' parameter was removed as it is no longer supported.
+          # The action will automatically create 'resume.pdf' from 'resume.tex'.
 
       # Step 3: Upload the compiled PDF as an "artifact".
       # This makes the PDF downloadable from the workflow's summary page.
@@ -37,5 +36,5 @@ jobs:
         with:
           # The name of the artifact bundle.
           name: PDF-Resume
-          # The path to the file to be uploaded.
+          # The path to the file to be uploaded is still correct.
           path: resume.pdf
