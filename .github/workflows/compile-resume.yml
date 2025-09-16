@@ -1,44 +1,27 @@
-name: Build LaTeX Resume with XeLaTeX
+name: Build LaTeX Resume
 
 on:
   push:
     branches:
       - main
-      - master
 
 jobs:
   build_latex:
     runs-on: ubuntu-latest
+
     steps:
-      # 1. Check out your repository code
-      - name: Check out repository
+      - name: Set up Git repository
         uses: actions/checkout@v4
 
-      # 2. UPDATED: Set up TeX Live using the new action path
-      - name: Set up TeX Live
-        uses: texlive-action/setup-texlive@v1
+      # We no longer need any font installation steps!
+      - name: Compile LaTeX document
+        uses: xu-cheng/latex-action@v3
         with:
-          # A full scheme is recommended to ensure all necessary packages are available
-          scheme: full
+          root_file: resume.tex
+          compiler: xelatex
 
-      # 3. Install Microsoft Core Fonts (including Arial)
-      - name: Install MS Core Fonts
-        run: |
-          echo "ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true" | sudo debconf-set-selections
-          sudo apt-get update
-          sudo apt-get install -y ttf-mscorefonts-installer
-
-      # 4. Compile the .tex file using xelatex
-      - name: Compile LaTeX to PDF with XeLaTeX
-        run: |
-          xelatex -interaction=nonstopmode resume.tex
-          xelatex -interaction=nonstopmode resume.tex
-
-      # 5. Commit the generated PDF file back to your repository
-      - name: Commit PDF file
-        uses: stefanzweifel/git-auto-commit-action@v5
+      - name: Upload PDF artifact
+        uses: actions/upload-artifact@v4
         with:
-          commit_message: "docs: [Bot] Rebuild resume.pdf"
-          file_pattern: resume.pdf
-          commit_user_name: Resume Bot
-          commit_user_email: resume-bot@users.noreply.github.com
+          name: PDF-Resume
+          path: resume.pdf
