@@ -3,6 +3,7 @@ name: Build LaTeX Resume with XeLaTeX
 on:
   push:
     branches:
+      - main
       - master
 
 jobs:
@@ -13,24 +14,23 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      # 2. Install a full TeX Live distribution
+      # 2. UPDATED: Set up TeX Live using the new action path
       - name: Set up TeX Live
-        uses: xu-cheng/setup-texlive-action@v3
+        uses: texlive-action/setup-texlive@v1
         with:
+          # A full scheme is recommended to ensure all necessary packages are available
           scheme: full
 
-      # 3. NEW: Install Microsoft Core Fonts (including Arial)
+      # 3. Install Microsoft Core Fonts (including Arial)
       - name: Install MS Core Fonts
         run: |
           echo "ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true" | sudo debconf-set-selections
           sudo apt-get update
           sudo apt-get install -y ttf-mscorefonts-installer
 
-      # 4. UPDATED: Compile the .tex file using xelatex
+      # 4. Compile the .tex file using xelatex
       - name: Compile LaTeX to PDF with XeLaTeX
         run: |
-          # Use xelatex as required by the fontspec package
-          # Run twice to ensure all references and layouts are correct
           xelatex -interaction=nonstopmode resume.tex
           xelatex -interaction=nonstopmode resume.tex
 
