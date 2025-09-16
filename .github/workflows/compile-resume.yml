@@ -1,0 +1,41 @@
+# This is the name of the workflow as it will appear in the "Actions" tab of your GitHub repository.
+name: Build LaTeX Resume
+
+# This section defines when the workflow should run.
+# It will run on every push to the "main" branch.
+on:
+  push:
+    branches:
+      - master
+
+# This section defines the actual job that will be executed.
+jobs:
+  build_latex:
+    # The job will run on the latest version of Ubuntu.
+    runs-on: ubuntu-latest
+
+    # These are the individual steps the job will perform.
+    steps:
+      # Step 1: Check out your repository code so the workflow can access it.
+      - name: Set up Git repository
+        uses: actions/checkout@v4
+
+      # Step 2: This is the main action that compiles the LaTeX file.
+      # It uses a pre-built action from the community.
+      - name: Compile LaTeX document
+        uses: xu-cheng/latex-action@v3
+        with:
+          # The main .tex file to be compiled. Change this if your file has a different name.
+          root_file: resume.tex
+          # The name of the output PDF file.
+          output_file: resume.pdf
+
+      # Step 3: Upload the compiled PDF as an "artifact".
+      # This makes the PDF downloadable from the workflow's summary page.
+      - name: Upload PDF artifact
+        uses: actions/upload-artifact@v4
+        with:
+          # The name of the artifact bundle.
+          name: PDF-Resume
+          # The path to the file to be uploaded.
+          path: resume.pdf
