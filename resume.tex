@@ -1,0 +1,169 @@
+% !TEX program = xelatex % (can also use "lualatex") 
+
+\documentclass[a4paper,8pt]{article}
+
+\usepackage{parskip} 
+\usepackage{hologo}
+\usepackage{fontspec}
+
+%other packages for formatting
+\RequirePackage{color}
+\RequirePackage{graphicx}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage[scale=0.9, top=.4in, bottom=.4in]{geometry}
+
+%tabularx environment
+\usepackage{tabularx}
+
+%for lists within experience section
+\usepackage{enumitem}
+
+% centered version of 'X' col. type
+\newcolumntype{C}{>{\centering\arraybackslash}X} 
+
+%to prevent spillover of tabular into next pages
+\usepackage{supertabular}
+\usepackage{tabularx}
+\newlength{\fullcollw}
+\setlength{\fullcollw}{0.42\textwidth}
+
+%custom \section
+\usepackage{titlesec}       
+\usepackage{multicol}
+\usepackage{multirow}
+
+%CV Sections inspired by: 
+%http://stefano.italians.nl/archives/26
+\titleformat{\section}{\Large\scshape\raggedright}{}{0em}{}[\titlerule]
+\titlespacing{\section}{1pt}{1pt}{1pt}
+
+%for publications
+\usepackage[style=authoryear,sorting=ynt, maxbibnames=2]{biblatex}
+
+%Setup hyperref package, and colours for links
+\usepackage[unicode, draft=false]{hyperref}
+\color[HTML]{110223}%{1C033C}
+\addbibresource{citations.bib}
+\setlength\bibitemsep{1em}
+
+%for social icons
+\usepackage{fontawesome5}
+% \usepackage{times}
+
+% For underline
+\usepackage[normalem]{ulem}
+
+\setmainfont{Arial}  % Set it to whatever you like
+
+\begin{document}
+
+% non-numbered pages
+\pagestyle{empty} 
+
+
+\begin{tabularx}{\linewidth}{@{} C @{}}
+\color[HTML]{1C033C} \Huge{Saumya Ranjan} \\[4pt]
+\\
+\textcolor[HTML]{371e77}{\underline{\href{mailto:saumyaranjan1111@gmail.com}{\raisebox{-0.05\height}{\faEnvelope} saumyaranjan1111@gmail.com}} $|$}
+\textcolor[HTML]{371e77}{\href{tel:+918789404882}{\raisebox{-0.05\height}{\faMobile} +91 8789404882}}
+
+\textcolor[HTML]{371e77}{\underline{\href{https://github.com/saumyaranjan1111}{\raisebox{-0.05\height}{\faGithub} github.com/saumyaranjan1111}} $|$}
+\textcolor[HTML]{371e77}{\underline{\href{https://www.linkedin.com/in/ranjansaumya/}{\raisebox{-0.05\height}{\faLinkedin} linkedin.com/in/ranjansaumya/}}}
+\end{tabularx}
+
+% Education
+\section{Education}
+\begin{tabularx}{\linewidth}{ @{}l r@{} }
+\color[HTML]{1C033C} \textbf{Birla Institute of Technology, Mesra (BIT MESRA)} & \hfill \color[HTML]{371e77} December 2020 - July 2024 \\
+\color[HTML]{371e77} B.Tech in Electronics and Communication Engineering {} & \hfill \color[HTML]{4B28A4} \textit{\textbf{CGPA: 8.96}} \\
+\multicolumn{2}{@{}X@{}}{Relevant Courses:  OOP (C++), Algorithms and Data Structures I and II (C++), Machine Learning, Neural Networks}
+\end{tabularx}
+
+% \hfill
+\section{Work Experience}
+
+\begin{tabularx}{\linewidth}{ @{}l r@{} }
+\color[HTML]{1C033C} \textbf{Data Engineer, Axis Bank} \hfill \color[HTML]{371e77} August 2024 - Present\\[3pt]
+\color[HTML]{371e77}\textbf{\textit{Retail Lending Operations}} \hfill \color[HTML]{4B28A4} \textit{PySpark, Python, SQL, Hadoop, AWS, Informatica, ETL, Git} \\[4pt]
+\begin{minipage}[t]{\linewidth}
+    \begin{itemize}[nosep,after=\strut, leftmargin=2em, itemsep=1pt] 
+    \item Architected and deployed a resilient SCD Type 2 pipeline for the SUPER LOAN ACCOUNT DIM table using PySpark, replacing a legacy truncate-and-load process. This unlocked critical historical data for trend analysis and regulatory reporting.
+    \item Drove a 50\%+ reduction in ETL processing time by optimizing Spark jobs through strategic data partitioning and broadcasting, cutting the daily refresh window for over 100 million records from 4 hours to under 2 hours.
+    \item Designed and automated multiple end-to-end data pipelines using, ingesting terabytes of raw data into the Hadoop ecosystem. This initiative decreased manual data handling by 40\% and reduced data reconciliation errors by 30\%.
+    \item Actively participated in all Agile/Scrum ceremonies, including sprint planning and backlog grooming, and enforced code quality standards through peer reviews, ensuring timely delivery of scalable data solutions.
+    \end{itemize}
+\end{minipage}
+\end{tabularx}
+
+% \hfill 
+% Projects
+\section{Projects}
+\begin{tabularx}{\linewidth}{ @{}l r@{} }
+\color[HTML]{1C033C} \textbf{\uline{\href{https://github.com/saumyaranjan1111/data-pipeline}{Real-Time Data Processing Pipeline}}} \hfill \color[HTML]{371e77} July 2025\\[3pt]
+\color[HTML]{371e77}\textbf{\textit{End-to-End Streaming ETL with Kafka and Spark}} \hfill \color[HTML]{4B28A4} \textit{PySpark, Kafka, Docker, Python, SQL} \\[4pt]
+\begin{minipage}[t]{\linewidth}
+ \begin{itemize}[nosep,after=\strut, leftmargin=2em, itemsep=1pt]
+  \item Engineered a real-time data pipeline to ingest, process, and store streaming data using Apache Kafka for messaging and PySpark Structured Streaming for processing.
+  \item Utilized Docker and Docker Compose for containerization, creating a reproducible and isolated development environment for all pipeline components.
+ \end{itemize}
+ \end{minipage}
+\end{tabularx}
+
+\begin{tabularx}{\linewidth}{ @{}l r@{} }
+\color[HTML]{1C033C} \textbf{\uline{\href{https://github.com/saumyaranjan1111/Minor-Project-Semester-VII/tree/master}{
+Alzheimer's Detection using Speech Signal Analysis }}} \hfill \color[HTML]{371e77} Nov 2023 \\[3pt]
+\color[HTML]{371e77}\textbf{\textit{Data Processing and ML Model for Disease Diagnosis}} \hfill \color[HTML]{4B28A4} \textit{Python, Scikit-learn, Pandas} \\[4pt]
+\begin{minipage}[t]{\linewidth}
+    \begin{itemize}[nosep,after=\strut, leftmargin=2em, itemsep=1pt]
+        \item Developed a data processing workflow to extract MFCC features from raw audio signals for use in machine learning.
+        \item Built and trained an SVM classification model to detect Alzheimer's, demonstrating an end-to-end data science project lifecycle.
+    \end{itemize}
+    \end{minipage}
+\end{tabularx}
+
+% \hfill 
+\section{Skills}
+\color[HTML]{1C033C}\textbf{Technologies \& Tools:} \color[HTML]{371e77}PySpark, Python, SQL, Hadoop, Hive, Kafka, Informatica (ETL), Docker, AWS, Git, Github, Jenkins, C++, MongoDB, PostgreSQL \\[4pt]
+\color[HTML]{1C033C}\textbf{Certifications:} 
+\color[HTML]{371e77}\uline{\href{https://coursera.org/share/44a2b142b461949455bcbdbe0c65d9df}{IBM: Python for Data Science, AI and Development}}, 
+\color[HTML]{371e77} \uline{\href{https://coursera.org/share/f110dc00423a73fad3dbe4822b3a1c46}{UC Davis: SQL for Data Science}}
+
+% \hfill 
+% Leadership and Volunteering
+\section{Leadership and Volunteering}
+\begin{tabularx}{\linewidth}{ @{}l r@{} }
+\color[HTML]{1C033C} \textbf{IEEE Student Branch, BIT Mesra} \hfill \color[HTML]{371e77} 
+\color[HTML]{FFFFFF} \textit{Google, Microsoft, Netflix, Meta, Facebook, NVIDIA}\\[4pt]
+\color[HTML]{371e77}\textbf{\textit{Android and Web Development Team (MERN Stack)}} \\[4pt]
+\begin{minipage}[t]{\linewidth}
+    \begin{itemize}[nosep,after=\strut, leftmargin=2em, itemsep=1pt]
+        \item Orchestrated workshops, coding sessions, and events to enhance technical skills for over 100 students.
+    \end{itemize}
+\end{minipage}
+\end{tabularx}
+
+\begin{tabularx}{\linewidth}{ @{}l r@{} }
+\color[HTML]{1C033C} \textbf{Google Developers Students Club, BIT Mesra} \hfill \color[HTML]{371e77}  \\[4pt]
+\color[HTML]{371e77}\textbf{\textit{Lead Competitive Programmer, Competitive Programming and Web Development Team }} \\[4pt]
+\begin{minipage}[t]{\linewidth}
+    \begin{itemize}[nosep,after=\strut, leftmargin=2em, itemsep=1pt]
+        \item Conducted various workshops on Competitive Programming and C++ for more than 100 students.
+    \end{itemize}
+\end{minipage}
+\end{tabularx}
+
+% \hfill 
+\section{Achievements}
+\\[2pt]
+% \hfill 
+
+\begin{minipage}[t]{\linewidth}
+    \begin{itemize}[nosep,after=\strut, leftmargin=2em, itemsep=1pt]
+        \item \textbf{Specialist on Codeforces: }Achieved the title of Specialist on CodeForces, demonstrating strong problem-solving skills.
+        \item \textbf{Competitive Programming Ranks:} Consistently ranked in the top percentile in global contests, including Rank 2451 in Codeforces Round 919 and Rank 2884 in Leetcode Weekly Contest 382.
+        \item \textbf{DSA Proficiency:} Solved over 600 Data Structures and Algorithms questions on platforms including Leetcode, GeeksforGeeks, and Codeforces.
+        \item \textbf{G.P. Birla Scholarship Recipient:} Received the prestigious G.P. Birla Scholarship for outstanding academic performance. 
+    \end{itemize}
+\end{minipage}
+
+\end{document}
