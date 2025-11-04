@@ -1,0 +1,59 @@
+name: Compile Markdown Resume and Create Release
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - 'resume.md' # Only runs when the markdown file changes
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Install Pandoc and a minimal LaTeX engine (just for fonts/PDF conversion)
+      - name: Install Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y pandoc texlive-latex-base texlive-fonts-recommended
+
+      # Convert Markdown to PDF
+      # We add geometry options to set margins similar to your LaTeX file
+      - name: Compile PDF
+        run: |
+          pandoc resume.md \
+            -V geometry:"top=1in, bottom=1in, left=1in, right=1in" \
+            -o resume.pdf
+
+      - name: Upload PDF Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: compiled-resume-pdf
+          path: resume.pdf
+          retention-days: 7
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
+    permissions:
+      contents: write
+
+    steps:
+      - name: Download compiled artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: compiled-resume-pdf
+          path: .
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: Resume-${{ github.sha }}
+          name: Resume PDF - ${{ github.ref_name }}
+          body: Automated PDF generation from Markdown.
+          files: resume.pdf
+          draft: false
+          prerelease: false
