@@ -1,0 +1,42 @@
+name: Compile LaTeX Resume and Create Release
+
+on:
+  push:
+    branches:
+      - master # Triggers the workflow whenever there is a push to the master branch
+    paths:
+      - 'resume.tex' # Only run if resume.tex file changes
+
+jobs:
+  build_and_release:
+    runs-on: ubuntu-latest
+    
+    steps:
+      # 1. Checkout the repository code
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. Compile LaTeX to PDF using an established action
+      - name: Compile LaTeX to PDF
+        uses: xu-cheng/latex-action@v2
+        with:
+          root_file: resume.tex # The main LaTeX file to compile
+          compiler: pdflatex # Common compiler for modern LaTeX templates
+
+      # 3. Get the current date and time to use as the release version
+      - name: Get current date and time
+        id: date
+        run: echo "NOW=$(date +'%Y.%m.%d-%H%M')" >> $GITHUB_OUTPUT
+        
+      # 4. Create a new GitHub Release with the compiled PDF attached
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: Resume-${{ steps.date.outputs.NOW }} # Tag format: Resume-YYYY.MM.DD-HHMM
+          name: Automated Resume Update ${{ steps.date.outputs.NOW }}
+          body: |
+            Automated PDF generation following a push to the master branch.
+            Source commit: ${{ github.sha }}
+          files: resume.pdf # Attaches the generated PDF file
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Default token provided by GitHub
