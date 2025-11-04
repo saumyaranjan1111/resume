@@ -1,5 +1,5 @@
 /* ==== Base Setup ==== */
-body { 
+body {
   font-family: 'TeX Gyre Termes', 'Times New Roman', Times, serif;
   color: #000;
   background-color: #fff;
@@ -33,6 +33,7 @@ header h1 {
 .contact-info {
   font-size: 13px;
   color: #000;
+  margin-bottom:-10px;
 }
 
 .contact-info i {
@@ -50,8 +51,10 @@ header h1 {
 
 /* ==== Section Headings ==== */
 section {
-  margin-top: 10px; /* reduced vertical gap between sections */
+  margin-top: -5px;   /* tighter spacing between sections */
+  margin-bottom: 0px; /* optional small bottom gap for balance */
 }
+
 
 section h2 {
   font-size: 16px;
@@ -175,4 +178,11 @@ ul li {
   margin-bottom: 1px; /* reduce spacing between bullets */
   line-height: 1.2;   /* tighter vertical spacing between lines */
 }
+
+@media print {
+  header h1 {
+    font-size: 42px;
+  }
+}
+
 
