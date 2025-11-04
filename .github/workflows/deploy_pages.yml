@@ -1,48 +1,44 @@
 name: Deploy Release PDF to GitHub Pages
 
 on:
-  release:
-    # --- THIS IS THE FIX ---
-    # Listen for when the release is first published AND when it is edited (overwritten)
-    types: [published, edited] 
-  workflow_dispatch:
+  workflow_run:
+    workflows: ["Compile HTML Resume and Create Release"]
+    types:
+      - completed
+  workflow_dispatch:  # still allow manual runs
 
-# Grant permissions for the workflow to deploy to GitHub Pages
 permissions:
-  contents: read    # to read release assets
-  pages: write      # to deploy to Pages
-  id-token: write   # to authenticate with OIDC
+  contents: read
+  pages: write
+  id-token: write
 
 jobs:
-  # Job 1: Download the PDF from the release
-  download-artifact:
+  deploy:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
+
     steps:
-      - name: Download PDF from the latest release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          mkdir -p deployment
-          
-          # This command will now correctly get the tag name from either the 'published' or 'edited' event
-          gh release download ${{ github.event.release.tag_name }} \
-            --pattern "Saumya_Ranjan_Resume.pdf" \
-            --dir ./deployment \
-            --repo ${{ github.repository }}
+      - name: Download artifact from triggering workflow
+        uses: actions/download-artifact@v4
+        with:
+          name: compiled-resume-pdf
+          path: ./deployment
+          # You can download artifacts from the triggering workflow:
+          # (workflow_run automatically provides access to them)
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          run-id: ${{ github.event.workflow_run.id }}
 
       - name: Upload artifact for GitHub Pages
         uses: actions/upload-pages-artifact@v3
         with:
           path: './deployment'
 
-  # Job 2: Deploy the downloaded PDF to GitHub Pages
-  deploy:
-    needs: download-artifact 
+  publish:
+    needs: deploy
     runs-on: ubuntu-latest
-    
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}/Saumya_Ranjan_Resume.pdf
+      url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
       - name: Deploy to GitHub Pages
