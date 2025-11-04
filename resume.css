@@ -179,6 +179,26 @@ ul li {
   line-height: 1.2;   /* tighter vertical spacing between lines */
 }
 
+
+/* ==== Larger Base Font for Body Text (Non-headings) ==== */
+p,
+ul li,
+.education-table td,
+.education-table th,
+.job-location,
+.project-tech {
+  font-size: 14.5px; /* or 15px for slightly larger text */
+  line-height: 1.35;
+}
+
+h2 {
+  font-size: 15.5px;
+}
+
+.skills-list p {
+  font-size: 14.5px;
+}
+
 @media print {
   header h1 {
     font-size: 42px;
