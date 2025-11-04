@@ -1,174 +1,361 @@
-% !TEX program = xelatex % (can also use "lualatex") 
+%-------------------------
+% Resume in Latex
+% Author : Saumya Ranjan
+% License : MIT
+%------------------------
 
-\documentclass[a4paper,8pt]{article}
+\documentclass[letterpaper,11pt]{article}
 
-\usepackage{parskip} 
-\usepackage{hologo}
-\usepackage{fontspec}
-
-%other packages for formatting
-\RequirePackage{color}
-\RequirePackage{graphicx}
-\usepackage[usenames,dvipsnames]{xcolor}
-\usepackage[scale=0.9, top=.4in, bottom=.4in]{geometry}
-
-%tabularx environment
-\usepackage{tabularx}
-
-%for lists within experience section
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
 \usepackage{enumitem}
-
-% centered version of 'X' col. type
-\newcolumntype{C}{>{\centering\arraybackslash}X} 
-
-%to prevent spillover of tabular into next pages
-\usepackage{supertabular}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
 \usepackage{tabularx}
-\newlength{\fullcollw}
-\setlength{\fullcollw}{0.42\textwidth}
-
-%custom \section
-\usepackage{titlesec}       
-\usepackage{multicol}
-\usepackage{multirow}
-
-%CV Sections inspired by: 
-%http://stefano.italians.nl/archives/26
-\titleformat{\section}{\Large\scshape\raggedright}{}{0em}{}[\titlerule]
-\titlespacing{\section}{1pt}{1pt}{1pt}
-
-%for publications
-\usepackage[style=authoryear,sorting=ynt, maxbibnames=2]{biblatex}
-
-%Setup hyperref package, and colours for links
-\usepackage[unicode, draft=false]{hyperref}
-\color[HTML]{110223}%{1C033C}
-\addbibresource{citations.bib}
-\setlength\bibitemsep{1em}
-
-%for social icons
 \usepackage{fontawesome5}
-% \usepackage{times}
+\usepackage{multicol}
+\setlength{\multicolsep}{-3.0pt}
+\setlength{\columnsep}{-1pt}
+% \input{glyphtounicode} % This line was causing the error and is not needed with modern compilers.
+% \pdfgentounicode=1 % This was also causing an error, commenting out.
 
-% For underline
-\usepackage[normalem]{ulem}
 
-% Use the Lato font, loaded from the local 'fonts' directory
-\setmainfont{Lato-Regular.ttf}[
-  Path           = ./fonts/,
-  BoldFont       = Lato-Bold.ttf,
-  ItalicFont     = Lato-Italic.ttf
-]
+
+
+\usepackage{tabularx} % For creating tables with adjustable-width columns
+\usepackage{colortbl} % For coloring table cells
+\usepackage{array} % For additional table options
+\usepackage{booktabs} % For prettier tables
+\usepackage{geometry} % For page margin settings
+
+% Set the margins to ensure the table fits well within the text area
+\geometry{
+  left=1in,
+  right=1in,
+  top=1in,
+  bottom=1in,
+  headheight=0in,
+  headsep=0in,
+  footskip=.3in
+}
+
+% Define a new column type for vertical centering and different width coefficients
+\newcolumntype{Y}[1]{>{\centering\arraybackslash\hsize=#1\hsize}X}
+
+
+
+
+%----------FONT OPTIONS----------
+
+
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Adjust margins
+\addtolength{\oddsidemargin}{-0.6in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1.19in}
+\addtolength{\topmargin}{-.7in}
+\addtolength{\textheight}{1.4in}
+
+\urlstyle{same}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Sections formatting
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\normalsize\bfseries
+}{}{0em}{}[\color{black}\titlerule \vspace{-3pt}]
+
+% Ensure that generate pdf is machine readable/ATS parsable
+% \pdfgentounicode=1 % Moved this to after the \input line was removed
+
+%-------------------------
+% Custom commands
+\newcommand{\resumeItem}[1]{
+  \item\small{
+    {#1 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\classesList}[4]{
+    \item\small{
+        {#1 #2 #3 #4 \vspace{-2pt}}
+  }
+}
+
+% --- FIXED THE TYPO HERE: \extracilsep -> \extracolsep ---
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{1.0\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & \textbf{\small #2} \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubSubheading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \textit{\small#1} & \textit{\small #2} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+    \item
+    \begin{tabular*}{1.001\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & \textbf{\small #2}\\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
+
+
+\renewcommand\labelitemi{{\tiny\textbullet}}
+\renewcommand\labelitemii{{\tiny\textbullet}}
+%\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+
+
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.0in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+%-------------------------------------------
+%%%%%%  RESUME STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 \begin{document}
 
-% non-numbered pages
-\pagestyle{empty} 
 
+\begin{flushright}
+  \vspace{-4pt}
+  %\color{gray}
+  \item
+ 
+\end{flushright}
 
-\begin{tabularx}{\linewidth}{@{} C @{}}
-\color[HTML]{1C033C} \Huge{Saumya Ranjan} \\[4pt]
-\\
-\textcolor[HTML]{371e77}{\underline{\href{mailto:saumyaranjan1111@gmail.com}{\raisebox{-0.05\height}{\faEnvelope} saumyaranjan1111@gmail.com}} $|$}
-\textcolor[HTML]{371e77}{\href{tel:+918789404882}{\raisebox{-0.05\height}{\faMobile} +91 8789404882}}
+\vspace{-48pt}
 
-\textcolor[HTML]{371e77}{\underline{\href{https://github.com/saumyaranjan1111}{\raisebox{-0.05\height}{\faGithub} github.com/saumyaranjan1111}} $|$}
-\textcolor[HTML]{371e77}{\underline{\href{https://www.linkedin.com/in/ranjansaumya/}{\raisebox{-0.05\height}{\faLinkedin} linkedin.com/in/ranjansaumya/}}}
-\end{tabularx}
+\begin{center}
+    \textbf{\Huge \scshape Saumya Ranjan } \\ 
+\vspace{1pt}
+    \small  $  $
+     $  $
+%   \faIcon{github}
+%   \href{https://github.com/saumyaranjan1111}
+%   {\underline{github.com/Saumya-Ranjan}}
+    \faIcon{linkedin}
+    \href{https://www.linkedin.com/in/ranjansaumya/}{\underline{saumya-ranjan/}} $  $
+    \faIcon{envelope}
+    \href{mailto:saumyaranjan1111@gmail.com}
+    {\underline{saumyaranjan1111@gmail.com}}
+    \faIcon{mobile}
+    {\underline{+91 8789404882}}
+\end{center}
 
-% Education
+%-----------EDUCATION-----------
+\vspace{-20pt}
 \section{Education}
-\begin{tabularx}{\linewidth}{ @{}l r@{} }
-\color[HTML]{1C033C} \textbf{Birla Institute of Technology, Mesra (BIT MESRA)} & \hfill \color[HTML]{371e77} December 2020 - July 2024 \\
-\color[HTML]{371e77} B.Tech in Electronics and Communication Engineering {} & \hfill \color[HTML]{4B28A4} \textit{\textbf{CGPA: 8.96}} \\
-\multicolumn{2}{@{}X@{}}{Relevant Courses:  OOP (C++), Algorithms and Data Structures I and II (C++), Machine Learning, Neural Networks}
+
+{
+\renewcommand{\arraystretch}{1.0} % Increase the row height, adjust the number as needed
+\noindent\begin{tabularx}{\textwidth}{| Y{0.9} | Y{1.9} | Y{0.6} | Y{0.6} |}
+\hline
+\rowcolor[gray]{.9} % Table header background color
+\textbf{Education} & \textbf{Institute} & \textbf{CGPA/\%} & \textbf{Year} \\
+\hline
+B.Tech & Birla Institute of Technology & 9.1 & 2020--2024  \\
+\hline
+% Class XII & Narayana Junior College, Hyderabad & 97.4\% & 2019--2020 \\
+% \hline
+% Class X & Narayana High School, Hyderabad & 9.8 & 2017--2018 \\
+% \hline
 \end{tabularx}
+}
 
-% \hfill
-\section{Work Experience}
+\vspace{-14pt}
 
-\begin{tabularx}{\linewidth}{ @{}l r@{} }
-\color[HTML]{1C033C} \textbf{Data Engineer, Axis Bank} \hfill \color[HTML]{371e77} August 2024 - Present\\[3pt]
-\color[HTML]{371e77}\textbf{\textit{Retail Lending Operations}} \hfill \color[HTML]{4B28A4} \textit{PySpark, Python, SQL, Hadoop, AWS, Informatica, ETL, Git} \\[4pt]
-\begin{minipage}[t]{\linewidth}
-    \begin{itemize}[nosep,after=\strut, leftmargin=2em, itemsep=1pt] 
-    \item Architected and deployed a resilient SCD Type 2 pipeline for the SUPER LOAN ACCOUNT DIM table using PySpark, replacing a legacy truncate-and-load process. This unlocked critical historical data for trend analysis and regulatory reporting.
-    \item Drove a 50\%+ reduction in ETL processing time by optimizing Spark jobs through strategic data partitioning and broadcasting, cutting the daily refresh window for over 100 million records from 4 hours to under 2 hours.
-    \item Designed and automated multiple end-to-end data pipelines using, ingesting terabytes of raw data into the Hadoop ecosystem. This initiative decreased manual data handling by 40\% and reduced data reconciliation errors by 30\%.
-    \item Actively participated in all Agile/Scrum ceremonies, including sprint planning and backlog grooming, and enforced code quality standards through peer reviews, ensuring timely delivery of scalable data solutions.
-    \end{itemize}
-\end{minipage}
-\end{tabularx}
 
-% \hfill 
-% Projects
+%-----------EXPERIENCE-----------
+\section{Experience}
+\vspace{-3pt}
+  \resumeSubHeadingListStart 
+  \resumeSubheading
+{\small Data Engineer, Axis Bank}{Jul 2024 - Present}
+{Bengaluru, India}{}
+  \resumeItemListStart
+    \resumeItem{Designed and maintained \textbf{40+} reusable, metadata-driven \textbf{ETL pipelines} using \textbf{IICS, Pyspark, Informatica} and \textbf{SQL} for financial data ingestion and transformation, ensuring data consistency, lineage, and governance compliance.}
+    % --- This next bullet point is good, but let's re-frame it slightly for DE ---
+    \resumeItem{Engineered data models to process \textbf{500K+ loan payments} and \textbf{1M+ credit card transactions} daily, identifying fraud and anomalies to feed risk mitigation systems.}
+%   \resumeItem{Worked with Big Data tools such as \textbf{Apache Hive} and \textbf{Impala} for distributed querying and data warehousing.}
+    \resumeItem{Optimized complex SQL queries in \textbf{Oracle SQL, Hive} and \textbf{Impala}, reduced execution time by \textbf{20-50\%}.}
+    \resumeItem{Integrated \textbf{SCD2} on fact table with \textbf{50M+} records, to ensure historical integrity and maintain robust data lineage.}
+    % --- This BA bullet point is re-framed for DE ---
+    \resumeItem{Collaborated with cross-functional business teams to build backend data models powering real-time \textbf{Tableau} dashboards.}
+%    \resumeItem{Automated \textbf{data quality checks} and report generation, improved data accuracy, and reduced manual efforts by \textbf{20\%}.}
+    \resumeItem{Automated \textbf{data quality checks} and report generation, saving \textbf{25+} hrs/mo of manual effort and improving accuracy.}
+    \resumeItem{ Implemented \textbf{CI/CD} pipelines with Jenkins and Bitbucket to streamline ETL deployments and ensure reliable releases.}
+  \resumeItemListEnd
+  \resumeSubHeadingListEnd
+\vspace{-14pt}
+
+% %-----------PROJECTS-----------
+% \section{Projects}
+% \vspace{-3pt}
+% \resumeSubHeadingListStart
+
+% % --- This is the new, simpler Streaming Project ---
+% \resumeProjectHeading
+% {\textbf{\small{Real-Time Reddit Comment Sentiment Analysis (Streaming)}}}{\textbf{\small{Python, Kafka, Spark Streaming, MongoDB, Docker}}}
+% \resumeItemListStart
+%   \resumeItem{Developed a real-time sentiment analysis pipeline for live Reddit comments from specific subreddits.}
+%   \resumeItem{Wrote a \textbf{Python} script (using PRAW) to ingest live comment streams and produce them to an \textbf{Apache Kafka} topic.}
+%   \resumeItem{Built a \textbf{Spark Streaming} consumer to read from Kafka, apply sentiment analysis (using VaderSentiment), and write the resulting structured data (comment, sentiment, timestamp) to \textbf{MongoDB}.}
+%   \resumeItem{Containerized the Kafka, Zookeeper, and Python components using \textbf{Docker Compose} for a reproducible environment.}
+% \resumeItemListEnd        
+% \vspace{-10pt}
+
+% % --- This is the new, simpler Batch Project ---
+% \resumeProjectHeading
+% {\textbf{\small{Web Server Log Processing ETL (Batch)}}}{\textbf{\small{Python, Apache Airflow, Pandas, PostgreSQL, Docker}}}
+% \resumeItemListStart
+%   \resumeItem{Built a batch ETL pipeline using \textbf{Apache Airflow} to process and analyze daily web server access logs.}
+%   \resumeItem{Developed a \textbf{Python} script with \textbf{Pandas} to parse raw log files, clean data (e.g., remove bot traffic), and transform it into a structured CSV format.}
+%   \resumeItem{Designed an Airflow DAG to orchestrate the pipeline, scheduling daily runs to extract, transform, and load the cleaned data into a \textbf{PostgreSQL} database for analytical queries.}
+% \resumeItemListEnd        
+% \vspace{-10pt}
+
+% % --- The Alzheimer's project, reframed for Data Processing ---
+% \resumeProjectHeading
+% {\textbf{\small{ML Data Preprocessing for Speech Analysis}}}{\textbf{\small{Python, Scikit-learn, Pandas, Librosa}}}
+% \resumeItemListStart
+%   \resumeItem{Developed a robust \textbf{data processing workflow} to clean, normalize, and transform raw audio signals from a public dementia dataset.}
+%   \resumeItem{Engineered features by extracting \textbf{MFCCs (Mel-Frequency Cepstral Coefficients)} and other audio attributes using \textbf{Librosa} and \textbf{Pandas} to create a feature-rich dataset.}
+%   \resumeItem{Built and validated an SVM classification model (\textbf{Scikit-learn}) on the processed data, demonstrating an end-to-end data pipeline from raw unstructured data to a usable ML model.}
+% \resumeItemListEnd
+% \resumeSubHeadingListEnd
+% \vspace{-14pt}
+
+
+% %-----------PROJECTS-----------
+% \section{Projects}
+% \vspace{-3pt}
+% \resumeSubHeadingListStart
+
+% % --- New Batch Project with Iceberg & AWS ---
+% \resumeProjectHeading
+% {\textbf{\small{Batch ETL Pipeline with AWS Glue and Apache Iceberg (Batch)}}}{\textbf{\small{AWS Glue (PySpark), S3, RDS, Iceberg, Athena}}}
+% \resumeItemListStart
+%   \resumeItem{Engineered a daily batch ETL pipeline to sync a transactional \textbf{AWS RDS} (PostgreSQL) database with a data lake built on \textbf{S3}.}
+%   \resumeItem{Used \textbf{AWS Glue} (PySpark) to read source data, apply transformations, and perform \textbf{upserts} (MERGE INTO) into an \textbf{Apache Iceberg} table.}
+%   \resumeItem{Leveraged Iceberg's \textbf{ACID transactions} and schema evolution capabilities to ensure data consistency and prevent downstream errors during updates.}
+%   \resumeItem{Configured the Iceberg table in the Glue Data Catalog, making it queryable via \textbf{AWS Athena} for ad-hoc analytics on the free tier.}
+% \resumeItemListEnd        
+% \vspace{-10pt}
+
+% % --- New Streaming Project with Iceberg & AWS ---
+% \resumeProjectHeading
+% {\textbf{\small{Real-Time Clickstream Ingestion with Kinesis and Iceberg (Streaming)}}}{\textbf{\small{AWS Kinesis, AWS Glue Streaming, S3, Iceberg, Athena}}}
+% \resumeItemListStart
+%   \resumeItem{Developed a real-time data pipeline to ingest and store user clickstream data using AWS free-tier services.}
+%   \resumeItem{Wrote a \textbf{Python} producer (Boto3) to simulate click events and send them to an \textbf{AWS Kinesis Data Stream}.}
+%   \resumeItem{Built an \textbf{AWS Glue Streaming} job to consume from Kinesis, apply minor transformations, and write data to an \textbf{Apache Iceberg} table in \textbf{S3} in near real-time.}
+%   \resumeItem{Demonstrated \textbf{time-travel queries} using Iceberg snapshots via \textbf{Athena} to analyze historical data states without needing backups.}
+% \resumeItemListEnd        
+% \vspace{-10pt}
+
+% % --- Kept the ML project as requested ---
+% \resumeProjectHeading
+% {\textbf{\small{ML Data Preprocessing for Speech Analysis}}}{\textbf{\small{Python, Scikit-learn, Pandas, Librosa}}}
+% \resumeItemListStart
+%   \resumeItem{Developed a robust \textbf{data processing workflow} to clean, normalize, and transform raw audio signals from a public dementia dataset.}
+%   \resumeItem{Engineered features by extracting \textbf{MFCCs (Mel-Frequency Cepstral Coefficients)} and other audio attributes using \textbf{Librosa} and \textbf{Pandas} to create a feature-rich dataset.}
+%   \resumeItem{Built and validated an SVM classification model (\textbf{Scikit-learn}) on the processed data, demonstrating an end-to-end data pipeline from raw unstructured data to a usable ML model.}
+% \resumeItemListEnd
+% \resumeSubHeadingListEnd
+% \vspace{-14pt}
+
+%-----------PROJECTS-----------
 \section{Projects}
-\begin{tabularx}{\linewidth}{ @{}l r@{} }
-\color[HTML]{1C033C} \textbf{\uline{\href{https://github.com/saumyaranjan1111/data-pipeline}{Real-Time Data Processing Pipeline}}} \hfill \color[HTML]{371e77} July 2025\\[3pt]
-\color[HTML]{371e77}\textbf{\textit{End-to-End Streaming ETL with Kafka and Spark}} \hfill \color[HTML]{4B28A4} \textit{PySpark, Kafka, Docker, Python, SQL} \\[4pt]
-\begin{minipage}[t]{\linewidth}
- \begin{itemize}[nosep,after=\strut, leftmargin=2em, itemsep=1pt]
-  \item Engineered a real-time data pipeline to ingest, process, and store streaming data using Apache Kafka for messaging and PySpark Structured Streaming for processing.
-  \item Utilized Docker and Docker Compose for containerization, creating a reproducible and isolated development environment for all pipeline components.
- \end{itemize}
- \end{minipage}
-\end{tabularx}
+\vspace{-3pt}
+\resumeSubHeadingListStart
 
-\begin{tabularx}{\linewidth}{ @{}l r@{} }
-\color[HTML]{1C033C} \textbf{\uline{\href{https://github.com/saumyaranjan1111/Minor-Project-Semester-VII/tree/master}{
-Alzheimer's Detection using Speech Signal Analysis }}} \hfill \color[HTML]{371e77} Nov 2023 \\[3pt]
-\color[HTML]{371e77}\textbf{\textit{Data Processing and ML Model for Disease Diagnosis}} \hfill \color[HTML]{4B28A4} \textit{Python, Scikit-learn, Pandas} \\[4pt]
-\begin{minipage}[t]{\linewidth}
-    \begin{itemize}[nosep,after=\strut, leftmargin=2em, itemsep=1pt]
-        \item Developed a data processing workflow to extract MFCC features from raw audio signals for use in machine learning.
-        \item Built and trained an SVM classification model to detect Alzheimer's, demonstrating an end-to-end data science project lifecycle.
-    \end{itemize}
-    \end{minipage}
-\end{tabularx}
+\resumeProjectHeading {\textbf{\small{Data Lakehouse Engineering: Incremental Customer Data Sync}}}{\textbf{\small{PySpark, Iceberg, RDS, S3, Athena}}} \resumeItemListStart \resumeItem{Engineered an incremental batch ETL pipeline to sync Customer Profile data from an \textbf{AWS RDS} (PostgreSQL) source to an S3 Data Lake.} \resumeItem{Developed a PySpark job (hosted on EC2) to connect to RDS, extract new/updated records, and perform data transformations.} \resumeItem{Implemented Apache Iceberg to manage data lake table integrity, leveraging \textbf{ACID-compliant upserts} (MERGE INTO) to ensure reliable data consistency on update.} \resumeItem{Managed Iceberg metadata via the AWS Glue Data Catalog, enabling low-cost, serverless querying of the final dataset via \textbf{AWS Athena}.} \resumeItemListEnd \vspace{-10pt}
+% --- NEW Mid-Level LOCAL Streaming Project ---
+\resumeProjectHeading {\textbf{\small{Real-Time Log Aggregation with Stateful Streaming}}}{\textbf{\small{PySpark, Kafka, Avro, Schema Registry, PostgreSQL}}} \resumeItemListStart \resumeItem{Engineered an E2E streaming pipeline using \textbf{Docker Compose} to orchestrate \textbf{Kafka, Schema Registry}, and PostgreSQL environments locally.} \resumeItem{Developed a data producer to send schema-enforced log events using \textbf{Avro serialization} and managed schema evolution via the Schema Registry.} \resumeItem{Built a \textbf{PySpark Structured Streaming} application to consume Kafka, implement stateful aggregation (1-min tumbling window) on log errors.} \resumeItem{Utilized a custom \textbf{foreachBatch sink} to reliably write time-windowed aggregates into a \textbf{PostgreSQL} table, ensuring sink flexibility.} \resumeItemListEnd \vspace{-10pt}
 
-% \hfill 
-\section{Skills}
-\color[HTML]{1C033C}\textbf{Technologies \& Tools:} \color[HTML]{371e77}PySpark, Python, SQL, Hadoop, Hive, Kafka, Informatica (ETL), Docker, AWS, Git, Github, Jenkins, C++, MongoDB, PostgreSQL \\[4pt]
-\color[HTML]{1C033C}\textbf{Certifications:} 
-\color[HTML]{371e77}\uline{\href{https://coursera.org/share/44a2b142b461949455bcbdbe0c65d9df}{IBM: Python for Data Science, AI and Development}}, 
-\color[HTML]{371e77} \uline{\href{https://coursera.org/share/f110dc00423a73fad3dbe4822b3a1c46}{UC Davis: SQL for Data Science}}
+% --- Kept the ML project as requested ---
+\resumeProjectHeading
+{\textbf{\small{ML Data Preprocessing for Speech Analysis}}}{\textbf{\small{Python, Scikit-learn, Pandas, Librosa}}}
+\resumeItemListStart
+  \resumeItem{Developed a robust \textbf{data processing workflow} to clean, normalize, and transform raw audio signals from a public dementia dataset.}
+  \resumeItem{Engineered features by extracting \textbf{MFCCs (Mel-Frequency Cepstral Coefficients)} and other audio attributes using \textbf{Librosa} and \textbf{Pandas} to create a feature-rich dataset.}
+  \resumeItem{Built and validated an SVM classification model (\textbf{Scikit-learn}) on the processed data, demonstrating an end-to-end data pipeline from raw unstructured data to a usable ML model.}
+\resumeItemListEnd
+\resumeSubHeadingListEnd
+\vspace{-14pt}
 
-% \hfill 
-% Leadership and Volunteering
-\section{Leadership and Volunteering}
-\begin{tabularx}{\linewidth}{ @{}l r@{} }
-\color[HTML]{1C033C} \textbf{IEEE Student Branch, BIT Mesra} \hfill \color[HTML]{371e77} 
-\color[HTML]{FFFFFF} \textit{Google, Microsoft, Netflix, Meta, Facebook, NVIDIA}\\[4pt]
-\color[HTML]{371e77}\textbf{\textit{Android and Web Development Team (MERN Stack)}} \\[4pt]
-\begin{minipage}[t]{\linewidth}
-    \begin{itemize}[nosep,after=\strut, leftmargin=2em, itemsep=1pt]
-        \item Orchestrated workshops, coding sessions, and events to enhance technical skills for over 100 students.
-    \end{itemize}
-\end{minipage}
-\end{tabularx}
 
-\begin{tabularx}{\linewidth}{ @{}l r@{} }
-\color[HTML]{1C033C} \textbf{Google Developers Students Club, BIT Mesra} \hfill \color[HTML]{371e77}  \\[4pt]
-\color[HTML]{371e77}\textbf{\textit{Lead Competitive Programmer, Competitive Programming and Web Development Team }} \\[4pt]
-\begin{minipage}[t]{\linewidth}
-    \begin{itemize}[nosep,after=\strut, leftmargin=2em, itemsep=1pt]
-        \item Conducted various workshops on Competitive Programming and C++ for more than 100 students.
-    \end{itemize}
-\end{minipage}
-\end{tabularx}
-
-% \hfill 
+%
+%-----------PROGRAMMING SKILLS-----------
+% --- This section is now focused purely on DE skills ---
+% --- FIXED all '&' to '\&' ---
+\section{Technical Skills}
+\vspace{-40pt}
+ \begin{itemize}[leftmargin=0in, label={}]
+    \small{\item{
+     \textbf{Programming \& Query}{: Python | PySpark | Apache Spark | SQL | Shell (basics) } \\
+     \textbf{Cloud Services}{: AWS S3 | Lambda | RDS | Athena | AWS EC2} \\
+     \textbf{Data Lake \& DBs}{: Apache Iceberg | Hive | Impala | Oracle SQL | PostgreSQL} \\
+     \textbf{Streaming \& Ecosystem}{: Apache Kafka | Schema Registry | Avro | Informatica (IICS, PowerCenter)} \\
+     \textbf{DevOps \& Tools}{: Docker | Jenkins | Bitbucket | Git} \\
+     \textbf{ML \& Analysis}{: Pandas | Scikit-learn | Librosa}
+    }}
+ \end{itemize}
+ \vspace{-25pt}
+ 
+%    %-----------LEADERSHIP---------------
+% % --- This section was missing from your new resume ---
+% \section{Leadership and Volunteering}
+% \vspace{-3pt}
+% \resumeSubHeadingListStart
+%     \resumeSubheading
+%     {IEEE Student Branch, BIT Mesra}{}
+%     {Android and Web Development Team}{}
+%     \resumeItemListStart
+%         \resumeItem{Orchestrated workshops, coding sessions, and events to enhance technical skills for over 100 students.}
+%     \resumeItemListEnd
+    
+%     \resumeSubheading
+%     {Google Developers Students Club (GDSC), BIT Mesra}{}
+%     {Lead Competitive Programmer, CP and Web Development Team}{}
+%     \resumeItemListStart
+%         \resumeItem{Conducted various workshops on Competitive Programming and C++ for more than 100 students.}
+%     \resumeItemListEnd
+% \resumeSubHeadingListEnd
+% \vspace{-14pt}
+ 
+   %-----------ACHIEVEMENTS---------------
 \section{Achievements}
-\\[2pt]
-% \hfill 
-
-\begin{minipage}[t]{\linewidth}
-    \begin{itemize}[nosep,after=\strut, leftmargin=2em, itemsep=1pt]
-        \item \textbf{Specialist on Codeforces: }Achieved the title of Specialist on CodeForces, demonstrating strong problem-solving skills.
-        \item \textbf{Competitive Programming Ranks:} Consistently ranked in the top percentile in global contests, including Rank 2451 in Codeforces Round 919 and Rank 2884 in Leetcode Weekly Contest 382.
-        \item \textbf{DSA Proficiency:} Solved over 600 Data Structures and Algorithms questions on platforms including Leetcode, GeeksforGeeks, and Codeforces.
-        \item \textbf{G.P. Birla Scholarship Recipient:} Received the prestigious G.P. Birla Scholarship for outstanding academic performance. 
-    \end{itemize}
-\end{minipage}
-
+    \resumeSubHeadingListStart
+            \vspace{-7pt} 
+    \resumeItemListStart
+        \resumeItem{Received the \textbf{G.P. BIRLA Scholarship} for Academic Excellence (worth 1 lakh) for \textbf{4 semesters in a row}.}
+        \resumeItem{\textbf{Specialist on Codeforces}, under 1000 AIR in multiple Global competitive programming contests, solved 500+ questions on Codeforces}
+        \resumeItem{\textbf{Knight on Leetcode}, under 1000 AIR in multiple Leetcode weekly contests, solved 600+ questions on Leetcode}
+    \resumeItemListEnd
+    \resumeSubHeadingListEnd
 \end{document}
+
