@@ -33,7 +33,7 @@ jobs:
       - name: Upload PDF Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: compiled-resume-pdf
+          name: compiled-test-pdf
           path: test.pdf # The file created by the pdflatex command
           retention-days: 7 # Reduce retention for temporary files
 
@@ -51,15 +51,15 @@ jobs:
       - name: Download compiled artifact
         uses: actions/download-artifact@v4
         with:
-          name: compiled-resume-pdf
+          name: compiled-test-pdf
           path: . # Download directly to the current directory
 
       - name: Create Release
         uses: softprops/action-gh-release@v1
         with:
-          # Use the commit SHA or current date for a unique tag (better than run_number for resumes)
-          tag_name: Resume-${{ github.sha }}
-          name: Resume PDF - ${{ github.ref_name }}
+          # Use the commit SHA or current date for a unique tag (better than run_number for tests)
+          tag_name: test-${{ github.sha }}
+          name: test PDF - ${{ github.ref_name }}
           body: Automated PDF generation for latest changes.
           # The file name must match the name used in the download step
           files: test.pdf 
