@@ -1,23 +1,67 @@
-name: Simple LaTeX Compile
+name: simple
 
 on:
   push:
-    branches:
-      - master
+    branches: [master] # Assuming your main branch is 'master' (adjust if it's 'main')
     paths:
-      - 'test.tex' # Only runs if resume.tex changes
+      - 'test.tex' # Only run if the source LaTeX file changes
+  workflow_dispatch: # Allows manual trigger
 
 jobs:
-  compile_pdf:
+  # 1. BUILD JOB: Compiles test.tex into resume.pdf
+  build:
     runs-on: ubuntu-latest
     
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+    # Use the TeXLive container to ensure all packages/fonts are available
+    container:
+      image: ghcr.io/xu-cheng/texlive-debian:latest
 
-      - name: Compile resume.tex to PDF
-        uses: xu-cheng/latex-action@v2
+    steps:
+      - uses: actions/checkout@v4
+
+      # --- Removed Python/YAML/Jinja steps ---
+
+      # Compile LaTeX (The container has pdflatex pre-installed)
+      - name: Compile LaTeX
+        run: |
+          # Use pdflatex with error handling flags
+          pdflatex -interaction=nonstopmode -halt-on-error test.tex
+          # Run twice for cross-references, TOC, etc.
+          pdflatex -interaction=nonstopmode -halt-on-error test.tex
+
+      # Upload PDF artifact (using a simple, single name)
+      - name: Upload PDF Artifact
+        uses: actions/upload-artifact@v4
         with:
-          root_file: resume.tex
-          compiler: pdflatex
-          # The PDF will be created in your workspace but not automatically released
+          name: compiled-resume-pdf
+          path: resume.pdf # The file created by the pdflatex command
+          retention-days: 7 # Reduce retention for temporary files
+
+  # 2. RELEASE JOB: Creates a GitHub Release and attaches the PDF
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    # Run only if the push was to the master/main branch
+    if: github.ref == 'refs/heads/master' # Adjust to 'refs/heads/main' if necessary
+    permissions:
+      contents: write
+
+    steps:
+      # Download the single artifact
+      - name: Download compiled artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: compiled-resume-pdf
+          path: . # Download directly to the current directory
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          # Use the commit SHA or current date for a unique tag (better than run_number for resumes)
+          tag_name: Resume-${{ github.sha }}
+          name: Resume PDF - ${{ github.ref_name }}
+          body: Automated PDF generation for latest changes.
+          # The file name must match the name used in the download step
+          files: resume.pdf 
+          draft: false
+          prerelease: false
