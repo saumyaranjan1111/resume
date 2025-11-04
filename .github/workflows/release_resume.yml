@@ -20,8 +20,12 @@ jobs:
       - name: Compile LaTeX to PDF
         uses: xu-cheng/latex-action@v2
         with:
-          root_file: resume.tex # The main LaTeX file to compile
-          compiler: pdflatex # Common compiler for modern LaTeX templates
+          root_file: resume.tex
+          compiler: pdflatex # This looks correct
+          # Check this line: If you have an 'args' line, remove it or ensure it's correct.
+          # If you do not have an 'args' line, the action might be generating the invalid option.
+          # To ensure proper arguments are used, try adding this line:
+          args: -file-line-error -halt-on-error -interaction=nonstopmode
 
       # 3. Get the current date and time to use as the release version
       - name: Get current date and time
