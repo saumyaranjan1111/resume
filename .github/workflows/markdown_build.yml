@@ -17,8 +17,8 @@ jobs:
       - name: Install Dependencies
         run: |
           sudo apt-get update
-          # --- THIS LINE IS THE FIX ---
-          sudo apt-get install -y pandoc texlive-latex-base texlive-fonts-recommended texlive-latex-recommended
+          # --- THIS LINE IS THE FIX (added texlive-latex-extra) ---
+          sudo apt-get install -y pandoc texlive-latex-base texlive-fonts-recommended texlive-latex-recommended texlive-latex-extra
 
       # Convert Markdown to PDF
       - name: Compile PDF
