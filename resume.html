@@ -6,6 +6,9 @@
     <title>Saumya Ranjan - Resume</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
+    <link href="https://fonts.cdnfonts.com/css/tex-gyre-termes" rel="stylesheet">
+    
 </head>
 <body>
 
@@ -13,8 +16,10 @@
         <header>
             <h1>Saumya Ranjan</h1>
             <div class="contact-info">
-                <span><i class="fas fa-link"></i> <a href="https://www.linkedin.com/in/ranjansaumya/">linkedin.com/in/ranjansaumya</a></span>
+                <span><i class="fab fa-linkedin"></i> <a href="https://www.linkedin.com/in/ranjansaumya/">saumya-ranjan/</a></span>
+                <span>|</span>
                 <span><i class="fas fa-envelope"></i> <a href="mailto:saumyaranjan1111@gmail.com">saumyaranjan1111@gmail.com</a></span>
+                <span>|</span>
                 <span><i class="fas fa-mobile-alt"></i> +91 8789404882</span>
             </div>
         </header>
@@ -50,12 +55,12 @@
                 </div>
                 <p class="job-location">Bengaluru, India</p>
                 <ul>
-                    <li>Designed and maintained <strong>40+</strong> reusable, metadata-driven <strong>ETL pipelines</strong> using <strong>IICS, Pyspark, Informatica</strong> and <strong>SQL</strong> for financial data ingestion and transformation.</li>
-                    <li>Engineered data models to process <strong>500K+ loan payments</strong> and <strong>1M+ credit card transactions</strong> daily, identifying fraud and anomalies.</li>
-                    <li>Optimized complex SQL queries in <strong>Oracle SQL, Hive</strong> and <strong>Impala</strong>, reducing execution time by <strong>20-50%</strong>.</li>
+                    <li>Designed and maintained <strong>40+</strong> reusable, metadata-driven <strong>ETL pipelines</strong> using <strong>IICS, Pyspark, Informatica</strong> and <strong>SQL</strong> for financial data ingestion and transformation, ensuring data consistency, lineage, and governance compliance.</li>
+                    <li>Engineered data models to process <strong>500K+ loan payments</strong> and <strong>1M+ credit card transactions</strong> daily, identifying fraud and anomalies to feed risk mitigation systems.</li>
+                    <li>Optimized complex SQL queries in <strong>Oracle SQL, Hive</strong> and <strong>Impala</strong>, reduced execution time by <strong>20-50%</strong>.</li>
                     <li>Integrated <strong>SCD2</strong> on fact table with <strong>50M+</strong> records, to ensure historical integrity and maintain robust data lineage.</li>
                     <li>Collaborated with cross-functional business teams to build backend data models powering real-time <strong>Tableau</strong> dashboards.</li>
-                    <li>Automated <strong>data quality checks</strong> and report generation, saving <strong>25+ hrs/mo</strong> of manual effort and improving accuracy.</li>
+                    <li>Automated <strong>data quality checks</strong> and report generation, saving <strong>25+</strong> hrs/mo of manual effort and improving accuracy.</li>
                     <li>Implemented <strong>CI/CD</strong> pipelines with Jenkins and Bitbucket to streamline ETL deployments and ensure reliable releases.</li>
                 </ul>
             </div>
@@ -71,24 +76,24 @@
                 <ul>
                     <li>Engineered an incremental batch ETL pipeline to sync Customer Profile data from an <strong>AWS RDS</strong> (PostgreSQL) source to an S3 Data Lake.</li>
                     <li>Developed a PySpark job (hosted on EC2) to connect to RDS, extract new/updated records, and perform data transformations.</li>
-                    <li>Implemented Apache Iceberg to manage data lake table integrity, leveraging <strong>ACID-compliant upserts</strong> (MERGE INTO) to ensure reliable data consistency.</li>
+                    <li>Implemented Apache Iceberg to manage data lake table integrity, leveraging <strong>ACID-compliant upserts</strong> (MERGE INTO) to ensure reliable data consistency on update.</li>
                     <li>Managed Iceberg metadata via the AWS Glue Data Catalog, enabling low-cost, serverless querying of the final dataset via <strong>AWS Athena</strong>.</li>
                 </ul>
             </div>
-
+            <!-- <br> -->
             <div class="project">
                 <div class="project-heading">
                     <span class="project-title">Real-Time Log Aggregation with Stateful Streaming</span>
                     <span class="project-tech">PySpark, Kafka, Avro, Schema Registry, PostgreSQL</span>
                 </div>
                 <ul>
-                    <li>Engineered an E2E streaming pipeline using <strong>Docker Compose</strong> to orchestrate <strong>Kafka, Schema Registry</strong>, and PostgreSQL environments.</li>
+                    <li>Engineered an E2E streaming pipeline using <strong>Docker Compose</strong> to orchestrate <strong>Kafka, Schema Registry</strong>, and PostgreSQL environments locally.</li>
                     <li>Developed a data producer to send schema-enforced log events using <strong>Avro serialization</strong> and managed schema evolution via the Schema Registry.</li>
-                    <li>Built a <strong>PySpark Structured Streaming</strong> application to consume Kafka, implement <strong>stateful aggregation</strong> (1-min tumbling window) on log errors.</li>
-                    <li>Utilized a custom <strong>`foreachBatch` sink</strong> to reliably write time-windowed aggregates into a <strong>PostgreSQL</strong> table.</li>
+                    <li>Built a <strong>PySpark Structured Streaming</strong> application to consume Kafka, implement stateful aggregation (1-min tumbling window) on log errors.</li>
+                    <li>Utilized a custom <strong>`foreachBatch` sink</strong> to reliably write time-windowed aggregates into a <strong>PostgreSQL</strong> table, ensuring sink flexibility.</li>
                 </ul>
             </div>
-
+            <!-- <br> -->
             <div class="project">
                 <div class="project-heading">
                     <span class="project-title">ML Data Preprocessing for Speech Analysis</span>
@@ -96,15 +101,15 @@
                 </div>
                 <ul>
                     <li>Developed a robust <strong>data processing workflow</strong> to clean, normalize, and transform raw audio signals from a public dementia dataset.</li>
-                    <li>Engineered features by extracting <strong>MFCCs</strong> and other audio attributes using <strong>Librosa</strong> and <strong>Pandas</strong> to create a feature-rich dataset.</li>
-                    <li>Built and validated an SVM classification model (<strong>Scikit-learn</strong>) on the processed data, demonstrating an end-to-end pipeline.</li>
+                    <li>Engineered features by extracting <strong>MFCCs (Mel-Frequency Cepstral Coefficients)</strong> and other audio attributes using <strong>Librosa</strong> and <strong>Pandas</strong> to create a feature-rich dataset.</li>
+                    <li>Built and validated an SVM classification model (<strong>Scikit-learn</strong>) on the processed data, demonstrating an end-to-end data pipeline from raw unstructured data to a usable ML model.</li>
                 </ul>
             </div>
         </section>
 
-        <section>
+        <section class="skills">
             <h2>Technical Skills</h2>
-            <div class="skills-grid">
+            <div class="skills-list">
                 <p><strong>Programming & Query:</strong> Python | PySpark | Apache Spark | SQL | Shell (basics)</p>
                 <p><strong>Cloud Services:</strong> AWS S3 | Lambda | RDS | Athena | AWS EC2</p>
                 <p><strong>Data Lake & DBs:</strong> Apache Iceberg | Hive | Impala | Oracle SQL | PostgreSQL</p>
@@ -114,7 +119,7 @@
             </div>
         </section>
 
-        <section>
+        <section class="achievements">
             <h2>Achievements</h2>
             <ul>
                 <li>Received the <strong>G.P. BIRLA Scholarship</strong> for Academic Excellence (worth 1 lakh) for <strong>4 semesters in a row</strong>.</li>
