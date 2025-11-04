@@ -232,5 +232,90 @@ h2 {
   }
 }
 
+/* ==== Optimized Final Layout: Larger Font + Compact Spacing ==== */
+
+/* Global font size increase */
+body {
+  font-size: 14px;  /* up from 13.5px */
+  line-height: 1.2; /* slightly tighter */
+}
+
+/* Paragraphs, list items, table text */
+p,
+ul li,
+.education-table td,
+.education-table th,
+.job-location,
+.project-tech {
+  font-size: 14px;
+  line-height: 1.25;
+  margin-bottom: 2px;
+}
+
+/* Section headings slightly smaller to compensate */
+h2 {
+  font-size: 15px;
+  margin-bottom: 2px;
+  padding-bottom: 0;
+}
+
+/* Reduce gaps between sections */
+section {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+/* Tighten bullet lists */
+ul {
+  margin: 2px 0 0 22px;
+  padding: 0;
+}
+ul li {
+  margin-bottom: 2px;
+  text-align: justify;
+}
+
+/* Compact tables */
+.education-table th,
+.education-table td {
+  padding: 2px 5px;
+}
+
+/* Tighten projects & jobs spacing */
+.project {
+  margin-top: 3px;
+  margin-bottom: 3px;
+}
+.project ul {
+  margin-top: 1px;
+  margin-bottom: 1px;
+}
+.job-heading {
+  margin-bottom: 2px;
+}
+
+/* Slightly tighter contact info */
+.contact-info {
+  margin-bottom: -6px;
+  font-size: 13px;
+}
+
+/* ==== Print adjustments for perfect one-page fit ==== */
+@media print {
+  @page {
+    margin: 0in;
+  }
+  body {
+    zoom: 0.92; /* fits one page cleanly with the new font */
+  }
+  .container {
+    padding: 0in 0.35in;
+  }
+  section {
+    page-break-inside: avoid;
+  }
+}
+
+
 
 
