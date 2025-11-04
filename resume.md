@@ -1,4 +1,4 @@
-<h1 align="center">Saumya Ranjan</h1>
+<h1 align="center">Saumya Ranjan</h1> 
 <p align="center">
   <a href="https://www.linkedin.com/in/ranjansaumya/">linkedin.com/in/ranjansaumya</a> | 
   <a href="mailto:saumyaranjan1111@gmail.com">saumyaranjan1111@gmail.com</a> | 
