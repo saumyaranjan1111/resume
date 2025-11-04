@@ -8,7 +8,7 @@ on:
   workflow_dispatch: # Allows manual trigger
 
 jobs:
-  # 1. BUILD JOB: Compiles test.tex into resume.pdf
+  # 1. BUILD JOB: Compiles test.tex into test.pdf
   build:
     runs-on: ubuntu-latest
     
@@ -34,7 +34,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: compiled-resume-pdf
-          path: resume.pdf # The file created by the pdflatex command
+          path: test.pdf # The file created by the pdflatex command
           retention-days: 7 # Reduce retention for temporary files
 
   # 2. RELEASE JOB: Creates a GitHub Release and attaches the PDF
@@ -62,6 +62,6 @@ jobs:
           name: Resume PDF - ${{ github.ref_name }}
           body: Automated PDF generation for latest changes.
           # The file name must match the name used in the download step
-          files: resume.pdf 
+          files: test.pdf 
           draft: false
           prerelease: false
