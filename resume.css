@@ -185,4 +185,31 @@ ul li {
   }
 }
 
+/* ==== Print Optimization ==== */
+@media print {
+  @page {
+    margin: 0.3in;
+  }
+
+  body {
+    margin: 0;
+    zoom: 0.9; /* scales content to fit one A4 page */
+  }
+
+  .container {
+    width: auto;
+    margin: 0;
+    padding: 0.1in 0.3in;
+  }
+
+  a {
+    color: black;
+    text-decoration: underline;
+  }
+
+  section {
+    page-break-inside: avoid;
+  }
+}
+
 
