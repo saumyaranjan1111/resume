@@ -1,71 +1,47 @@
-name: CI github pages
+name: Compile LaTeX Resume and Create Release
 
 on:
   push:
     branches:
       - master
-
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
-permissions: write-all
-
-# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
-concurrency: 
-      group: "pages"
-      cancel-in-progress: false
+    paths:
+      - 'resume.tex'
 
 jobs:
-  build:
+  build_and_release:
     runs-on: ubuntu-latest
+    
     steps:
-      - name: Checkout
+      # 1. Checkout the repository code
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-
-      - name: Install Latex
-        run: |
-          sudo apt-get install texlive;
-          sudo apt-get install texlive-latex-extra;
-          sudo apt-get install texlive-font-utils; 
-
-          DOCUMENT_NAME="index.tex";
-          DOCUMENT_NAME_WO_EXT="$(echo $DOCUMENT_NAME | cut -d '.' -f 1)";
-          echo "DOCUMENT_NAME_WO_EXT = $DOCUMENT_NAME_WO_EXT"; 
-
-          latex $DOCUMENT_NAME
-
-          dvips -P pdf "${DOCUMENT_NAME_WO_EXT}.dvi"
-          ps2pdf "${DOCUMENT_NAME_WO_EXT}.ps"
-
-      - name: Commit and push changes
-        run: |
-          repoOwner=$(echo "${{ github.repository }}" | cut -d '/' -f 1);
-          repoOwnerEmail="saumyaranjan1111@gmail.com";
-          git config --global user.email ${repoOwnerEmail};
-          git config --global user.name ${repoOwner};
-          git pull origin master;
-          git checkout master;
-          git branch --set-upstream-to origin/master;
-          git merge master --ff-only;
-          git add /home/runner/work/repoName/repoName/index.pdf;
-          git diff-index --quiet HEAD || git commit -m "add files" --allow-empty;
-          git push
-
-      - name: Upload Artifact
-        uses: actions/upload-pages-artifact@v3
+      # 2. Compile LaTeX to PDF with latest TeXLive and robust compiler settings
+      #    - Uses 'latest' texlive_version for all modern fonts/packages
+      #    - Uses the default 'latexmk' compiler for automatic compilation/reruns
+      #    - Explicitly sets args to prevent "unrecognized option" errors
+      - name: Compile LaTeX to PDF
+        uses: xu-cheng/latex-action@v4
         with:
-          # location of the artifacts
-          path: "./"
+          root_file: resume.tex
+          texlive_version: 'latest' # Ensures the latest fonts and packages are available
+          compiler: latexmk # More robust compiler than pdflatex
+          args: -pdf -file-line-error -halt-on-error -interaction=nonstopmode -jobname=resume
 
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+      # 3. Get the current date and time to use as the release version
+      - name: Get current date and time
+        id: date
+        run: echo "NOW=$(date +'%Y.%m.%d-%H%M')" >> $GITHUB_OUTPUT
+        
+      # 4. Create a new GitHub Release with the compiled PDF attached
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: Resume-${{ steps.date.outputs.NOW }}
+          name: Automated Resume Update ${{ steps.date.outputs.NOW }}
+          body: |
+            Automated PDF generation following a push to the master branch.
+            Source commit: ${{ github.sha }}
+          files: resume.pdf # This file is created by the latex-action
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
