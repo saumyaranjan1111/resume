@@ -32,13 +32,23 @@ jobs:
             // Point to the local HTML file
             await page.goto('file://' + path.join(__dirname, 'resume.html'), {waitUntil: 'networkidle0'});
             
+            # // Replicating your LaTeX \addtolength commands
+            # await page.pdf({ 
+            #   path: 'Saumya_Ranjan_Resume.pdf', 
+            #   format: 'A4', 
+            #   printBackground: true, 
+            #   margin: { top: '0.3in', right: '0.4in', bottom: '0.3in', left: '0.4in' } 
+            # });
+
             // Replicating your LaTeX \addtolength commands
             await page.pdf({ 
               path: 'Saumya_Ranjan_Resume.pdf', 
               format: 'A4', 
               printBackground: true, 
-              margin: { top: '0.3in', right: '0.4in', bottom: '0.3in', left: '0.4in' } 
+              margin: { top: '0.0in', right: '0.0in', bottom: '0.0in', left: '0.0in' }  
             });
+
+
 
             await browser.close();
           })();" > generate.js
