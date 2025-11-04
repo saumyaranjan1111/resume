@@ -5,7 +5,7 @@ on:
     branches:
       - master
     paths:
-      - 'resume.tex' # Only runs if resume.tex changes
+      - 'test.tex' # Only runs if resume.tex changes
 
 jobs:
   compile_pdf:
