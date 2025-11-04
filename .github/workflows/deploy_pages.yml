@@ -1,0 +1,52 @@
+name: Deploy Release PDF to GitHub Pages
+
+# This workflow triggers *after* your other workflow finishes
+# and publishes a new release.
+on:
+  release:
+    types: [published] # Triggers when a release is created or updated
+
+# Grant permissions for the workflow to deploy to GitHub Pages
+permissions:
+  contents: read    # to read release assets
+  pages: write      # to deploy to Pages
+  id-token: write   # to authenticate with OIDC
+
+jobs:
+  # Job 1: Download the PDF from the release
+  download-artifact:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download PDF from the latest release
+        env:
+          # Use the GITHUB_TOKEN to authenticate with the GH CLI
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Create a directory for the artifact
+          mkdir -p deployment
+          
+          # Use the GitHub CLI to download the asset from the release that triggered this workflow
+          gh release download ${{ github.event.release.tag_name }} \
+            --pattern "Saumya_Ranjan_Resume.pdf" \
+            --dir ./deployment \
+            --repo ${{ github.repository }}
+
+      - name: Upload artifact for GitHub Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './deployment'
+
+  # Job 2: Deploy the downloaded PDF to GitHub Pages
+  deploy:
+    needs: download-artifact # Runs after the PDF is downloaded
+    runs-on: ubuntu-latest
+    
+    # Specify the deployment environment
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}/Saumya_Ranjan_Resume.pdf
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
