@@ -315,7 +315,34 @@ ul li {
     page-break-inside: avoid;
   }
 }
+/* ==== Enhanced Contact Info Styling ==== */
+.contact-info {
+  font-size: 16px;             /* increased from 13px */
+  color: #222;                   /* darker than #000 for subtle contrast */
+  margin-bottom: -4px;
+  font-weight: 500;              /* slightly bolder text for readability */
+  letter-spacing: 0.2px;
+}
 
+.contact-info i {
+  margin-right: 0px;
+  font-size: 15px;               /* slightly larger icons */
+  color: #444;
+}
+
+.contact-info a {
+  color: #003366;                /* professional navy tone for links */
+  text-decoration: underline;
+  font-weight: 550;
+}
+
+.contact-info a:hover {
+  color: #0055aa;                /* slightly lighter on hover (screen only) */
+}
+
+.contact-info span {
+  margin: 0 2px;
+}
 
 
 
