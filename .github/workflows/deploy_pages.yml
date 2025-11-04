@@ -5,6 +5,7 @@ on:
     # --- THIS IS THE FIX ---
     # Listen for when the release is first published AND when it is edited (overwritten)
     types: [published, edited] 
+  workflow_dispatch:
 
 # Grant permissions for the workflow to deploy to GitHub Pages
 permissions:
