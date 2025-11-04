@@ -5,7 +5,7 @@ on:
     branches: [master]
     paths:
       - 'resume.html' # Triggers on HTML change
-      - 'style.css'   # Triggers on CSS change
+      - 'resume.css'   # Triggers on CSS change
   workflow_dispatch:
 
 jobs:
