@@ -23,11 +23,12 @@ jobs:
 
       # Compile LaTeX (The container has pdflatex pre-installed)
       - name: Compile LaTeX
+        # Compile LaTeX using latexmk for robust, multi-pass compilation
+      - name: Compile LaTeX
         run: |
-          # Use pdflatex with error handling flags
-          pdflatex -interaction=nonstopmode -halt-on-error resume.tex
-          # Run twice for cross-references, TOC, etc.
-          pdflatex -interaction=nonstopmode -halt-on-error resume.tex
+          # Use latexmk to automatically handle multiple runs, bibtex, etc.
+          latexmk -pdf -interaction=nonstopmode -halt-on-error resume.tex
+          latexmk -pdf -interaction=nonstopmode -halt-on-error resume.tex
 
       # Upload PDF artifact (using a simple, single name)
       - name: Upload PDF Artifact
