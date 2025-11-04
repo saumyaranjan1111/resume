@@ -1,0 +1,178 @@
+/* ==== Base Setup ==== */
+body {
+  font-family: 'TeX Gyre Termes', 'Times New Roman', Times, serif;
+  color: #000;
+  background-color: #fff;
+  margin: 0;
+  padding: 0;
+  line-height: 1.25;
+  font-size: 13.5px;
+}
+
+/* ==== Main Container ==== */
+.container {
+  width: 800px;
+  margin: 20px auto;
+  padding: 0 15px;
+}
+
+/* ==== Header ==== */
+header {
+  text-align: center;
+  margin-bottom: 4px;
+}
+
+header h1 {
+  font-size: 40px;   /* increased from 26px */
+  margin-bottom: 4px;
+  font-weight: 550;
+  letter-spacing: -1px; /* optional: makes it slightly more elegant */
+}
+
+
+.contact-info {
+  font-size: 13px;
+  color: #000;
+}
+
+.contact-info i {
+  margin-right: 3px;
+}
+
+.contact-info a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+.contact-info span {
+  margin: 0 4px;
+}
+
+/* ==== Section Headings ==== */
+section {
+  margin-top: 10px; /* reduced vertical gap between sections */
+}
+
+section h2 {
+  font-size: 16px;
+  font-weight: 700;
+  border-bottom: 1px solid #000;
+  margin-bottom: 3px;
+  padding-bottom: 1px;
+}
+
+/* ==== Job / Project Headings ==== */
+.job-heading, .project-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-weight: 700;
+}
+
+.job-title, .project-title {
+  font-size: 14px;
+}
+
+.job-date {
+  font-size: 12.5px;
+  font-weight: 700;
+  font-style: italic;
+}
+
+/* Make project tech bold */
+.project-tech {
+  font-size: 12.5px;
+  font-weight: 700;
+  font-style: italic;
+}
+
+.job-location {
+  font-style: italic;
+  font-size: 12.5px;
+  margin-top: 1px;
+  margin-bottom: 3px;
+}
+
+/* ==== Paragraphs & Lists ==== */
+ul {
+  margin: 3px 0 0 26px;  /* shifted to right */
+  padding: 0;
+}
+
+ul li {
+  margin-bottom: 3px;
+  text-align: justify;
+}
+
+/* ==== Table Styling ==== */
+.education-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+  margin-bottom: 5px;
+}
+
+.education-table th,
+.education-table td {
+  border: 1px solid #999;
+  padding: 3px 6px;
+  text-align: center;  /* centered content */
+  vertical-align: middle;
+}
+
+.education-table th {
+  background-color: #f2f2f2;
+  font-weight: 700;
+}
+
+/* ==== Skills & Achievements ==== */
+.skills-list p {
+  margin: 2px 0;
+}
+
+.achievements ul {
+  margin-left: 26px;
+}
+
+.achievements li {
+  margin-bottom: 3px;
+}
+
+/* ==== Print Optimization ==== */
+@media print {
+  body {
+    margin: 0;
+  }
+  .container {
+    width: auto;
+    margin: 0;
+    padding: 0 20px;
+  }
+  a {
+    color: black;
+    text-decoration: underline;
+  }
+}
+
+
+/* ==== Projects Spacing ==== */
+.project {
+  margin-bottom: 5px; /* small gap between items inside a project */
+  margin-top: 5px;
+}
+
+.project + .project {
+  margin-top: 1px; /* very tight vertical spacing between consecutive projects */
+}
+
+.project ul {
+  margin-top: 2px;
+  margin-bottom: 2px;
+  padding-left: 18px; /* adjust if you want bullets closer to the text */
+}
+
+.project li {
+  margin-bottom: 1px; /* reduce spacing between bullets */
+  line-height: 1.2;   /* tighter vertical spacing between lines */
+}
+
