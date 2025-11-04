@@ -1,17 +1,19 @@
-# <p align="center">Saumya Ranjan</p>  
+<h1 align="center">Saumya Ranjan</h1>
 <p align="center">
-  <a href="https://www.linkedin.com/in/ranjansaumya/">linkedin.com/in/ranjansaumya</a> | 
-  <a href="mailto:saumyaranjan1111@gmail.com">saumyaranjan1111@gmail.com</a> | 
-  +91 8789404882
+  <a href="https://www.linkedin.com/in/ranjansaumya/">linkedin.com/in/ranjansaumya</a> | 
+  <a href="mailto:saumyaranjan1111@gmail.com">saumyaranjan1111@gmail.com</a> | 
+  +91 8789404882
 </p>
 
 ---
 
 ## Education
 
-| Education | Institute | CGPA/% | Year |
-| :--- | :--- | :--- | :--- |
-| B.Tech | Birla Institute of Technology | 9.1 | 2020-2024 |
++-----------+-----------------------------+--------+-------------+
+| Education | Institute                   | CGPA/% | Year        |
++===========+=============================+========+=============+
+| B.Tech    | Birla Institute of Technology | 9.1    | 2020-2024   |
++-----------+-----------------------------+--------+-------------+
 
 ---
 
