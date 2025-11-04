@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saumya Ranjan - Resume</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+
+    <main class="container">
+        <header>
+            <h1>Saumya Ranjan</h1>
+            <div class="contact-info">
+                <span><i class="fas fa-link"></i> <a href="https://www.linkedin.com/in/ranjansaumya/">linkedin.com/in/ranjansaumya</a></span>
+                <span><i class="fas fa-envelope"></i> <a href="mailto:saumyaranjan1111@gmail.com">saumyaranjan1111@gmail.com</a></span>
+                <span><i class="fas fa-mobile-alt"></i> +91 8789404882</span>
+            </div>
+        </header>
+
+        <section>
+            <h2>Education</h2>
+            <table class="education-table">
+                <thead>
+                    <tr>
+                        <th>Education</th>
+                        <th>Institute</th>
+                        <th>CGPA/%</th>
+                        <th>Year</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>B.Tech</td>
+                        <td>Birla Institute of Technology</td>
+                        <td>9.1</td>
+                        <td>2020–2024</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section>
+            <h2>Experience</h2>
+            <div class="job">
+                <div class="job-heading">
+                    <span class="job-title">Data Engineer, Axis Bank</span>
+                    <span class="job-date">Jul 2024 - Present</span>
+                </div>
+                <p class="job-location">Bengaluru, India</p>
+                <ul>
+                    <li>Designed and maintained <strong>40+</strong> reusable, metadata-driven <strong>ETL pipelines</strong> using <strong>IICS, Pyspark, Informatica</strong> and <strong>SQL</strong> for financial data ingestion and transformation.</li>
+                    <li>Engineered data models to process <strong>500K+ loan payments</strong> and <strong>1M+ credit card transactions</strong> daily, identifying fraud and anomalies.</li>
+                    <li>Optimized complex SQL queries in <strong>Oracle SQL, Hive</strong> and <strong>Impala</strong>, reducing execution time by <strong>20-50%</strong>.</li>
+                    <li>Integrated <strong>SCD2</strong> on fact table with <strong>50M+</strong> records, to ensure historical integrity and maintain robust data lineage.</li>
+                    <li>Collaborated with cross-functional business teams to build backend data models powering real-time <strong>Tableau</strong> dashboards.</li>
+                    <li>Automated <strong>data quality checks</strong> and report generation, saving <strong>25+ hrs/mo</strong> of manual effort and improving accuracy.</li>
+                    <li>Implemented <strong>CI/CD</strong> pipelines with Jenkins and Bitbucket to streamline ETL deployments and ensure reliable releases.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <h2>Projects</h2>
+            <div class="project">
+                <div class="project-heading">
+                    <span class="project-title">Data Lakehouse Engineering: Incremental Customer Data Sync</span>
+                    <span class="project-tech">PySpark, Iceberg, RDS, S3, Athena</span>
+                </div>
+                <ul>
+                    <li>Engineered an incremental batch ETL pipeline to sync Customer Profile data from an <strong>AWS RDS</strong> (PostgreSQL) source to an S3 Data Lake.</li>
+                    <li>Developed a PySpark job (hosted on EC2) to connect to RDS, extract new/updated records, and perform data transformations.</li>
+                    <li>Implemented Apache Iceberg to manage data lake table integrity, leveraging <strong>ACID-compliant upserts</strong> (MERGE INTO) to ensure reliable data consistency.</li>
+                    <li>Managed Iceberg metadata via the AWS Glue Data Catalog, enabling low-cost, serverless querying of the final dataset via <strong>AWS Athena</strong>.</li>
+                </ul>
+            </div>
+
+            <div class="project">
+                <div class="project-heading">
+                    <span class="project-title">Real-Time Log Aggregation with Stateful Streaming</span>
+                    <span class="project-tech">PySpark, Kafka, Avro, Schema Registry, PostgreSQL</span>
+                </div>
+                <ul>
+                    <li>Engineered an E2E streaming pipeline using <strong>Docker Compose</strong> to orchestrate <strong>Kafka, Schema Registry</strong>, and PostgreSQL environments.</li>
+                    <li>Developed a data producer to send schema-enforced log events using <strong>Avro serialization</strong> and managed schema evolution via the Schema Registry.</li>
+                    <li>Built a <strong>PySpark Structured Streaming</strong> application to consume Kafka, implement <strong>stateful aggregation</strong> (1-min tumbling window) on log errors.</li>
+                    <li>Utilized a custom <strong>`foreachBatch` sink</strong> to reliably write time-windowed aggregates into a <strong>PostgreSQL</strong> table.</li>
+                </ul>
+            </div>
+
+            <div class="project">
+                <div class="project-heading">
+                    <span class="project-title">ML Data Preprocessing for Speech Analysis</span>
+                    <span class="project-tech">Python, Scikit-learn, Pandas, Librosa</span>
+                </div>
+                <ul>
+                    <li>Developed a robust <strong>data processing workflow</strong> to clean, normalize, and transform raw audio signals from a public dementia dataset.</li>
+                    <li>Engineered features by extracting <strong>MFCCs</strong> and other audio attributes using <strong>Librosa</strong> and <strong>Pandas</strong> to create a feature-rich dataset.</li>
+                    <li>Built and validated an SVM classification model (<strong>Scikit-learn</strong>) on the processed data, demonstrating an end-to-end pipeline.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <h2>Technical Skills</h2>
+            <div class="skills-grid">
+                <p><strong>Programming & Query:</strong> Python | PySpark | Apache Spark | SQL | Shell (basics)</p>
+                <p><strong>Cloud Services:</strong> AWS S3 | Lambda | RDS | Athena | AWS EC2</p>
+                <p><strong>Data Lake & DBs:</strong> Apache Iceberg | Hive | Impala | Oracle SQL | PostgreSQL</p>
+                <p><strong>Streaming & Ecosystem:</strong> Apache Kafka | Schema Registry | Avro | Informatica (IICS, PowerCenter)</p>
+                <p><strong>DevOps & Tools:</strong> Docker | Jenkins | Bitbucket | Git</p>
+                <p><strong>ML & Analysis:</strong> Pandas | Scikit-learn | Librosa</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>Achievements</h2>
+            <ul>
+                <li>Received the <strong>G.P. BIRLA Scholarship</strong> for Academic Excellence (worth 1 lakh) for <strong>4 semesters in a row</strong>.</li>
+                <li><strong>Specialist on Codeforces</strong>, under 1000 AIR in multiple Global competitive programming contests, solved 500+ questions on Codeforces.</li>
+                <li><strong>Knight on Leetcode</strong>, under 1000 AIR in multiple Leetcode weekly contests, solved 600+ questions on Leetcode.</li>
+            </ul>
+        </section>
+
+    </main>
+
+</body>
+</html>
