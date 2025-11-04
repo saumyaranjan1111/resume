@@ -20,9 +20,6 @@ jobs:
       - uses: actions/checkout@v4
 
       # --- Removed Python/YAML/Jinja steps ---
-
-      # Compile LaTeX (The container has pdflatex pre-installed)
-      - name: Compile LaTeX
         # Compile LaTeX using latexmk for robust, multi-pass compilation
       - name: Compile LaTeX
         run: |
