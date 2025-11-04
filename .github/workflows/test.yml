@@ -1,0 +1,41 @@
+name: Test LaTeX Compilation Workflow
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'test.tex' # Triggers only when the test file changes
+
+jobs:
+  build_test_pdf:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Compile the test.tex file
+      - name: Compile Test LaTeX to PDF
+        uses: xu-cheng/latex-action@v4
+        with:
+          root_file: test.tex # Compiling the test file
+          texlive_version: 'latest' 
+          compiler: latexmk
+          args: -pdf -file-line-error -halt-on-error -interaction=nonstopmode -jobname=test_output
+
+      # Get the current date and time
+      - name: Get current date and time
+        id: date
+        run: echo "NOW=$(date +'%Y.%m.%d-%H%M')" >> $GITHUB_OUTPUT
+        
+      # Create a new GitHub Release with the compiled test PDF
+      - name: Create Test Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: Test-Run-${{ steps.date.outputs.NOW }}
+          name: Test Compilation Run ${{ steps.date.outputs.NOW }}
+          body: Successful test compilation of test.tex.
+          files: test_output.pdf # Attaches the generated test PDF (uses jobname)
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
