@@ -188,7 +188,7 @@ ul li {
 /* ==== Print Optimization ==== */
 @media print {
   @page {
-    margin: 0.3in;
+    margin: 0.0in;
   }
 
   body {
@@ -199,7 +199,7 @@ ul li {
   .container {
     width: auto;
     margin: 0;
-    padding: 0.1in 0.3in;
+    padding: 0.0in 0.0in;
   }
 
   a {
