@@ -13,14 +13,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # Install Pandoc and a minimal LaTeX engine (just for fonts/PDF conversion)
+      # Install Pandoc and the *required* LaTeX packages
       - name: Install Dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y pandoc texlive-latex-base texlive-fonts-recommended
+          # --- THIS LINE IS THE FIX ---
+          sudo apt-get install -y pandoc texlive-latex-base texlive-fonts-recommended texlive-latex-recommended
 
       # Convert Markdown to PDF
-      # We add geometry options to set margins similar to your LaTeX file
       - name: Compile PDF
         run: |
           pandoc resume.md \
