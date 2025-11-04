@@ -72,7 +72,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           tag_name: Resume-${{ github.sha }}
-          name: Resume PDF - ${{ github.ref_name }}
+          name: Resume PDF - HTML - ${{ github.ref_name }}
           body: Automated PDF generation from HTML/CSS source.
           files: Saumya_Ranjan_Resume.pdf
           draft: false
